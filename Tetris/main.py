@@ -100,8 +100,8 @@ def main():
 
     while True:
         for event in pygame.event.get():
-            if event.type == QUIT:
-                sys.exit()
+            if event.type == pygame.QUIT:
+                pygame.quit()
             elif event.type == KEYDOWN:
                 if event.key == K_RETURN:
                     if game_over:
@@ -119,12 +119,6 @@ def main():
                         pause = not pause
                 elif event.key in (K_w, K_UP):
                     # 旋转
-                    # 其实记得不是很清楚了，比如
-                    # .0.
-                    # .00
-                    # ..0
-                    # 这个在最右边靠边的情况下是否可以旋转，我试完了网上的俄罗斯方块，是不能旋转的，这里我们就按不能旋转来做
-                    # 我们在形状设计的时候做了很多的空白，这样只需要规定整个形状包括空白部分全部在游戏区域内时才可以旋转
                     if 0 <= cur_pos_x <= BLOCK_WIDTH - len(cur_block.template[0]):
                         _next_block = blocks.get_next_block(cur_block)
                         if _judge(cur_pos_x, cur_pos_y, _next_block):
